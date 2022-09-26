@@ -1,13 +1,16 @@
 package edu.farmingdale.bcs421.bcs421_f22_w3_demo1
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mBtn1: Button
-    lateinit var mTv: TextView
+    private lateinit var mBtn1: Button
+    private lateinit var mTv: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,9 +19,22 @@ class MainActivity : AppCompatActivity() {
         mTv = findViewById(R.id.tv1)
 
         mBtn1.setOnClickListener{doSomething() }
+
+        mTv.setOnClickListener{moveToActivity2() }
     }
 
-    fun doSomething(){
-        mTv.setText("Moaath Alrajab 99999")
+    private fun doSomething(){
+        mTv.text = "Moaath Alrajab 99999"
+        Toast.makeText(this, "Clicked me", Toast.LENGTH_LONG).show()
+    }
+
+    private fun moveToActivity2(){
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(android.content.Intent.EXTRA_EMAIL,
+            arrayOf("Moaath.alrajab@farmingdale.edu","alrajam@farmingdale.edu"))
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT,"alrajam@farmingdale.edu")
+        intent.putExtra(Intent.EXTRA_TEXT, "message")
+        startActivity(intent)
+
     }
 }
